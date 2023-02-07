@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+    <style>
+      #chat-container {
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .chat-message {
+        border: 1px solid black;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      .user-message {
+        text-align: left;
+        margin-left: 20px;
+        background-color: lightblue;
+      }
+
+      .chatbot-message {
+        text-align: right;
+        margin-right: 20px;
+        background-color: lightgray;
+      }
+
+      #text-input {
+        width: 60%;
+        height: 30px;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      #submit-button {
+        width: 20%;
+        height: 40px;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat-container">
+      <div id="chat-history"></div>
+      <input type="text" id="text-input" placeholder="Enter your message here"></input>
+      <button id="submit-button">Send</button>
+    </div>
+
+    <script>
+      const chatHistory = document.getElementById("chat-history");
+      const textInput = document.getElementById("text-input");
+      const submitButton = document.getElementById("submit-button");
+
+      submitButton.addEventListener("click", function() {
+        const userMessage = textInput.value;
+
+        const userMessageDiv = document.createElement("div");
+        userMessageDiv.classList.add("chat-message");
+        userMessageDiv.classList.add("user-message");
+        userMessageDiv.innerHTML = userMessage;
+        chatHistory.appendChild(userMessageDiv);
+
+        textInput.value = "";
+
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `text=${userMessage}`
+        })
+          .then(response => response.text())
+          .then(response => {
+            const chatbotMessageDiv = document.createElement("div");
+            chatbotMessageDiv.classList.add("chat-message");
+            chatbotMessageDiv.classList.add("chatbot-message");
+            chatbotMessageDiv.innerHTML = response;
+            chatHistory.appendChild(chatbotMessageDiv);
+          });
+      });
+    </script>
+  </body>
+</html>
