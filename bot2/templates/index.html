@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>ChatBot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      #chatbox {
+        background-color: #eee;
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 10px;
+        height: 300px;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+      }
+
+      #input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #333;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      p {
+        margin: 0;
+        padding: 10px;
+      }
+
+      .user {
+        background-color: #ddd;
+        float: left;
+        clear: both;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width: 80%;
+      }
+
+      .chatbot {
+        background-color: #fff;
+        float: right;
+        clear: both;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ChatBot</h1>
+    <div id="chatbox"></div>
+    <input id="input" type="text"/>
+    <button onclick="submitMessage()">Submit</button>
+    <script>
+      function submitMessage() {
+        var input = document.getElementById("input").value;
+        document.getElementById("input").value = "";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/get?msg=" + input, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            var chatbox = document.getElementById("chatbox");
+            var response = xhr.responseText;
+            chatbox.innerHTML += "<p class='user'><b>User:</b> " + input + "</p>";
+            chatbox.innerHTML += "<p class='chatbot'><b>ChatBot:</b> " + response + "</p>";
+            chatbox.scrollTop = chatbox.scrollHeight;
+          }
+        }
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
