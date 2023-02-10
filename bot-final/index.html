@@ -1,0 +1,217 @@
+<html>
+  <head>
+    <title>ChatBot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #333;
+      }
+      h1 {
+  text-align:center;
+  font-size: 6em;
+  color: white;
+}
+
+.neon {
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 10px #87ceeb, 0 0 15px #87ceeb, 0 0 30px deepskyblue, 0 0 30px deepskyblue, 0 0 30px deepskyblue, 0 0 40px deepskyblue, 0 0 50px deepskyblue, 0 0 60px deepskyblue, 0 0 70px deepskyblue, 0 0 80px deepskyblue, 0 0 90px deepskyblue, 0 0 100px skyblue;
+}
+
+      #chatbox {
+        background-color: #eee;
+        border: 1px solid #333;
+        border-radius: 5px;
+        padding: 10px;
+        height: 300px;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+      }
+
+      #input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #333;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      p {
+        margin: 0;
+        padding: 10px;
+      }
+
+      .user {
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+  float: left;
+  width: auto;
+  max-width: 80%;
+  position: relative;
+  clear: both;
+  
+  background: #95c2fd;
+  background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -ms-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -o-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  border: solid 1px rgba(0,0,0,0.5);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+
+  -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  
+  margin-bottom: 20px;
+  padding: 6px 20px;
+  color: #000;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+  word-wrap: break-word;
+}
+
+.user:before, .user:after {
+  border-radius: 20px / 5px;
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+.user:before {
+  border: 10px solid transparent;
+  border-bottom-color: rgba(0,0,0,0.5);
+  bottom: 0px;
+  left: -7px;
+  z-index: -2;
+}
+
+.user:after {
+  border: 8px solid transparent;
+  border-bottom-color: #bee2ff; /* arrow color */
+  bottom: 1px;
+  left: -5px;
+}
+
+.user-alt {
+  float: right;
+}
+.user-alt:before {
+  left: auto;
+  right: -7px;
+}
+.user-alt:after {
+  left: auto;
+  right: -5px;
+}
+
+.chatbot {
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+  float: right;
+  width: auto;
+  max-width: 80%;
+  position: relative;
+  clear: both;
+  
+  background: #95c2fd;
+  background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -ms-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: -o-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  background-image: linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+  border: solid 1px rgba(0,0,0,0.5);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+
+  -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+  
+  margin-bottom: 20px;
+  padding: 6px 20px;
+  color: #000;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+  word-wrap: break-word;
+}
+
+.chatbot:before, .chatbot:after {
+  border-radius: 20px / 5px;
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+.chatbot:before {
+  border: 10px solid transparent;
+  border-bottom-color: rgba(0,0,0,0.5);
+  bottom: 0px;
+  right: -7px;
+  z-index: -2;
+}
+
+.chatbot:after {
+  border: 8px solid transparent;
+  border-bottom-color: #bee2ff; /* arrow color */
+  bottom: 1px;
+  right: -5px;
+}
+
+.chatbot-alt {
+  float: right;
+}
+.chatbot-alt:before {
+  left: auto;
+  right: -7px;
+}
+.chatbot-alt:after {
+  left: auto;
+  right: -5px;
+}
+
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 class="neon">Global Hack Week</h1>
+    </div>
+    <h1>ChatBot</h1>
+    <div id="chatbox"></div>
+    <input id="input" type="text"/>
+    <button onclick="submitMessage()">Submit</button>
+    <script>
+      function submitMessage() {
+        var input = document.getElementById("input").value;
+        document.getElementById("input").value = "";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/get?msg=" + input, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            var chatbox = document.getElementById("chatbox");
+            var response = xhr.responseText;
+            chatbox.innerHTML += "<p class='user'><b>User:</b> " + input + "</p>";
+            chatbox.innerHTML += "<p class='chatbot'><b>ChatBot:</b> " + response + "</p>";
+            chatbox.scrollTop = chatbox.scrollHeight;
+          }
+        }
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
